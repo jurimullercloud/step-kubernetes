@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: phonebookapp-config
+  namespace: phonebookapp-final-proj
+data:
+  pg_user: {user}
+  pg_db: {db}
+  pg_pass: {password}
+  db_url: {db_url}
+  jwt_secret_key: {db_url}
+  backend_url: {backend_url}

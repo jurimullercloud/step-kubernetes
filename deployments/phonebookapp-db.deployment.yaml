@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: phonebookapp-db-deployment
+  namespace: phonebookapp-final-proj
+  labels:
+    app: phonebookapp
+specs:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phonebookapp
+      tier: frontend
+  template:
+    metadata:
+      name: phonebookapp-db-pod
+      namespace: phonebookapp-final-proj
+      labels:
+        app: phonebookapp
+        tier: db
+    specs:
+      containers:
+        - name: phonebookapp-db
+          image: {registry_name}/{image}:{version}
+          ports:
+            - containerPort: 5432
+          volumeMount:
+            - name: app-config
+              mountPath: /app/config
+
+      volumes:
+        - name: app-config
+          configMap:
+            name: phonebookapp-config
+            items:
+              - key: pg_user
+                path: pg_user
+              - key: pg_db
+                path: pg_db
+              - key: pg_pass
+                path: pg_pass

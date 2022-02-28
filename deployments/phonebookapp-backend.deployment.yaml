@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: phonebookapp-backend-deployment
+  namespace: phonebookapp-final-proj
+  labels:
+    app: phonebookapp
+specs:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: phonebookapp
+      tier: backend
+  template:
+    metadata:
+      name: phonebookapp-backend-pod
+      namespace: phonebookapp-final-proj
+      labels:
+        app: phonebookapp
+        tier: backend
+    specs:
+      containers:
+        - name: phonebookapp-backend
+          image: {registry_name}/{image}:{version}
+          ports:
+            - containerPort: 80
+          volumeMount:
+            - name: app-config
+              mountPath: /app/config
+      volumes:
+        - name: app-config
+          configMap:
+            name: phonebookapp-config
+            items:
+              - key: db-url
+                path: db-url
+              - key: jwt-secret-key
+                path: jwt-secret-key
+
+
