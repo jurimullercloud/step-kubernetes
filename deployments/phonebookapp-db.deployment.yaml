@@ -10,7 +10,7 @@ specs:
   selector:
     matchLabels:
       app: phonebookapp
-      tier: frontend
+      tier: db
   template:
     metadata:
       name: phonebookapp-db-pod
@@ -24,18 +24,21 @@ specs:
           image: {registry_name}/{image}:{version}
           ports:
             - containerPort: 5432
-          volumeMount:
-            - name: app-config
-              mountPath: /app/config
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: phonebookapp-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: phonebookapp-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: phonebookapp-secrets
+                  key: POSTGRES_DB
 
-      volumes:
-        - name: app-config
-          configMap:
-            name: phonebookapp-config
-            items:
-              - key: pg_user
-                path: pg_user
-              - key: pg_db
-                path: pg_db
-              - key: pg_pass
-                path: pg_pass
+
