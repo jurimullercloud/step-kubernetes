@@ -4,25 +4,25 @@ pipeline {
     stages {
         stage ("Create Namespace") {
             steps {
-                sh 'kubectl create -f ./namespace.yaml --dry-run=client'
+                sh 'kubectl create -f ./namespace.yaml'
             }
         }
 
         stage ("Set DB Service") {
             steps {
-                sh 'kubectl create -f ./services/phonebookapp-db.service.yaml --dry-run=client'
+                sh 'kubectl create -f ./services/phonebookapp-db.service.yaml'
             }
         }
 
         stage ("Set Backend Service") {
             steps {
-                sh 'kubectl create -f ./services/phonebookapp-backend.service.yaml --dry-run=client'
+                sh 'kubectl create -f ./services/phonebookapp-backend.service.yaml'
             }
         }
 
         stage ("Set Frontend Service (NodePort)") {
             steps {
-                sh 'kubectl create -f ./services/phonebookapp-frontend.service.yaml --dry-run=client'
+                sh 'kubectl create -f ./services/phonebookapp-frontend.service.yaml'
             }
         }
 
@@ -33,7 +33,7 @@ pipeline {
                     env.DB_SERVICE_NAME=  sh(script: "awk '/name:/ {print \$2}' ./services/phonebookapp-db.service.yaml", returnStdout: true)
                 }
                 sh 'python3 replace-secrets.py POSTGRES_USER=${POSTGRES_USER} POSTGRES_PASSWORD=${POSTGRES_PASSWORD} POSTGRES_DB=${POSTGRES_DB} DB_SERVICE_NAME=$DB_SERVICE_NAME JWT_SECRET_KEY=${JWT_SECRET_KEY}'
-                sh 'kubectl create -f ./phonebookapp-secrets.yaml --dry-run=client'
+                sh 'kubectl create -f ./phonebookapp-secrets.yaml'
             }
         }
     }
