@@ -9,7 +9,7 @@ spec:
   selector:
     app: phonebookapp
     tier: backend
-  type: ClusterIp
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 80

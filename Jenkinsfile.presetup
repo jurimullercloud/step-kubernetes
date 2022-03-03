@@ -2,6 +2,16 @@ pipeline {
     agent any
 
     stages {
+        stage ("Delete Previous Setups") {
+            script {
+                    env.NAMESPACE_NAME=  sh(script: "awk '/name:/ {print \$2}' ./namespace.yaml", returnStdout: true)
+            }
+
+            steps {
+                sh 'kubectl delete namespace $NAMESPACE_NAME'
+            }
+        }
+
         stage ("Create Namespace") {
             steps {
                 sh 'kubectl create -f ./namespace.yaml'
