@@ -1,6 +1,15 @@
 pipeline {
-
     agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub-access')
+    }
+
+    stage ("Login to DockerHub Registry") {
+        steps {
+            sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+        }
+    }
 
     stage ("Update Deployment files") {
         steps {
