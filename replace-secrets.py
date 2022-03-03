@@ -2,7 +2,7 @@ import sys
 import yaml
 
 if __name__ == "__main__":
-    data = dict([arg.split('=', maxsplit=1) for arg in sys.argv[2:]])
+    data = dict([arg.split('=', maxsplit=1) for arg in sys.argv[1:]])
 
     print(data)
     with open("./phonebookapp-secrets.yaml", "r") as f:
