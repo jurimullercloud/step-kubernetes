@@ -5,7 +5,7 @@ metadata:
   namespace: phonebookapp-final-proj
   labels:
     app: phonebookapp
-specs:
+spec:
   replicas: 2
   selector:
     matchLabels:

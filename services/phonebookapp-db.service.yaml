@@ -5,7 +5,7 @@ metadata:
   name: phonebookapp-db-service
   labels:
     app: phonebookapp
-specs:
+spec:
   selector:
     app: phonebook
     tier: db
