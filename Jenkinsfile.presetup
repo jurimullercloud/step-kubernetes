@@ -10,19 +10,19 @@ pipeline {
 
         stage ("Set DB Service") {
             steps {
-                sh 'kubectl create -f ./phonebookapp-db.service.yaml --dry-run=client'
+                sh 'kubectl create -f ./services/phonebookapp-db.service.yaml --dry-run=client'
             }
         }
 
         stage ("Set Backend Service") {
             steps {
-                sh 'kubectl create -f ./phonebookapp-backend.service.yaml --dry-run=client'
+                sh 'kubectl create -f ./services/phonebookapp-backend.service.yaml --dry-run=client'
             }
         }
 
         stage ("Set Frontend Service (NodePort)") {
             steps {
-                sh 'kubectl create -f ./phonebookapp-frontend.service.yaml --dry-run=client'
+                sh 'kubectl create -f ./services/phonebookapp-frontend.service.yaml --dry-run=client'
             }
         }
 
@@ -41,7 +41,7 @@ pipeline {
                 sh "sed -i 's/[db_service_name]/${DB_SERVICE_NAME}/g' ./phonebookapp-secrets.yaml"
                 sh "sed -i 's/[jwt_secret_name]/${JWT_SECRET_KEY}/g' ./phonebookapp-secrets.yaml"
 
-                sh 'kubectl create -f ./phonebookapp-secrets.yaml --dry-run=client'
+                sh 'kubectl create -f ./services/phonebookapp-secrets.yaml --dry-run=client'
             }
         }
     }
