@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        steps ("Deploy Secrets") {
+        stage ("Deploy Secrets") {
             steps {
                 script {
                     env.POSTGRES_USER = '${POSTGRES_USER}'
