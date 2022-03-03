@@ -15,7 +15,7 @@ pipeline {
         stage ("Update Deployment files") {
             steps {
                 script {
-                    env.DB_HOST_IP = sh('kubectl get svc ${DB_SERVICE_NAME} -o jsonpath=\'{.spec.clusterIP}\'')
+                    env.DB_HOST_IP = sh(script: 'kubectl get svc ${DB_SERVICE_NAME} -o jsonpath=\'{.spec.clusterIP}\'', returnStdout: true)
                 }
                 sh 'echo $DB_HOST_IP'
                 sh 'pip3 install -r requirements.txt'
