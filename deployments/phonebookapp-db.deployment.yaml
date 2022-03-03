@@ -43,4 +43,4 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "python3 init_db.py"]
+                command: ["/bin/sh", "-c", "python3 init_database.py"]
