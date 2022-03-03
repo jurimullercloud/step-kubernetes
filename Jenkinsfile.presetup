@@ -38,7 +38,7 @@ pipeline {
                 sh "sed -i 's/[pg_user]/${POSTGRES_USER}/g' ./phonebookapp-secrets.yaml"
                 sh "sed -i 's/[pg_password]/${POSTGRES_PASSWORD}/g' ./phonebookapp-secrets.yaml"
                 sh "sed -i 's/[pg_db]/${POSTGRES_DB}/g' ./phonebookapp-secrets.yaml"
-                sh "sed -i 's/[db_service_name]/${DB_SERVICE_NAME}/g' ./phonebookapp-secrets.yaml"
+                sh "sed -i 's/[db_service_name]/\${DB_SERVICE_NAME}/g' ./phonebookapp-secrets.yaml"
                 sh "sed -i 's/[jwt_secret_name]/${JWT_SECRET_KEY}/g' ./phonebookapp-secrets.yaml"
 
                 sh 'kubectl create -f ./services/phonebookapp-secrets.yaml --dry-run=client'
