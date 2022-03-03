@@ -18,7 +18,7 @@ spec:
       labels:
         app: phonebookapp
         tier: backend
-    specs:
+    spec:
       containers:
         - name: phonebookapp-backend
           image: img_name_placeholder
