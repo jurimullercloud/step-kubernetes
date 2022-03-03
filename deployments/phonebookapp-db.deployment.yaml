@@ -41,10 +41,10 @@ spec:
                   name: phonebookapp-secrets
                   key: POSTGRES_DB
             - name: DB_SERVICE_NAME
-                valueFrom:
-                  secretKeyRef:
-                    name: phonebookapp-secrets
-                    key: DB_SERVICE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: phonebookapp-secrets
+                  key: DB_SERVICE_NAME
           lifecycle:
             postStart:
               exec:
