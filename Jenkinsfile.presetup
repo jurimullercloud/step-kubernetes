@@ -3,12 +3,13 @@ pipeline {
 
     stages {
         stage ("Delete Previous Setups") {
-            script {
-                    env.NAMESPACE_NAME=  sh(script: "awk '/name:/ {print \$2}' ./namespace.yaml", returnStdout: true)
-            }
-
             steps {
-                sh 'kubectl delete namespace $NAMESPACE_NAME'
+                script {
+                    env.NAMESPACE_NAME=  sh(script: "awk '/name:/ {print \$2}' ./namespace.yaml", returnStdout: true)
+                    if (${CLEAN_START})  {
+                        sh 'kubectl delete namespace $NAMESPACE_NAME'
+                    }
+                }
             }
         }
 
