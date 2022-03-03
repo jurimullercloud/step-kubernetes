@@ -16,6 +16,7 @@ pipeline {
         stage ("Create Namespace") {
             steps {
                 sh 'kubectl create -f ./namespace.yaml'
+                sh 'kubectl config set-context --current --namespace=$NAMESPACE_NAME'
             }
         }
 
