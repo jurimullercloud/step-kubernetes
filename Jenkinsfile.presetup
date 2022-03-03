@@ -33,7 +33,7 @@ pipeline {
                     env.POSTGRES_PASSWORD = '${POSTGRES_PASSWORD}'
                     env.POSTGRES_DB = '${POSTGRES_DB}'
                     env.JWT_SECRET_KEY = '${JWT_SECRET_KEY}'
-                    env.DB_SERVICE_NAME=  sh('awk '/name:/ {print $2}' phonebookapp-db.service.yaml')
+                    env.DB_SERVICE_NAME=  sh(script: "awk '/name:/ {print $2}' phonebookapp-db.service.yaml", returnStdout: true)
                 }
                 sh "sed -i 's/[pg_user]/${POSTGRES_USER}/g' ./phonebookapp-secrets.yaml"
                 sh "sed -i 's/[pg_password]/${POSTGRES_PASSWORD}/g' ./phonebookapp-secrets.yaml"
