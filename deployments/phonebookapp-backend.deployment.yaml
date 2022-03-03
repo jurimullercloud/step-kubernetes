@@ -21,15 +21,30 @@ specs:
     specs:
       containers:
         - name: phonebookapp-backend
-          image: {registry_name}/{image}:{version}
+          image: img_name_placeholder
           ports:
             - containerPort: 80
           env:
-            - name: DB_URL
+            - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   - name: phonebookapp-secrets
-                    key: DB_URL
+                    key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  - name: phonebookapp-secrets
+                    key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  - name: phonebookapp-secrets
+                    key: POSTGRES_DB
+            - name: PG_HOST
+              valueFrom:
+                secretKeyRef:
+                  - name: phonebookapp-secrets
+                    key: PG_HOST
             - name: JWT_SECRET_KEY
               valueFrom:
                 secretKeyRef:

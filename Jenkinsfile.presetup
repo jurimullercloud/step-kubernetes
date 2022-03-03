@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage ("Create Namespace") {
+            steps {
+                sh 'kubectl create -f ./namespace.yaml'
+            }
+        }
+
+        stage ("Set DB Service") {
+            steps {
+                sh 'kubectl create -f ./phonebookapp-db.service.yaml'
+            }
+        }
+
+        stage ("Set Backend Service") {
+            steps {
+                sh 'kubectl create -f ./phonebookapp-backend.service.yaml'
+            }
+        }
+
+        stage ("Set Frontend Service (NodePort)") {
+            steps {
+                sh 'kubectl create -f ./phonebookapp-frontend.service.yaml'
+            }
+        }
+
+        steps ("Deploy Secrets") {
+            steps {
+                script {
+                    env.POSTGRES_USER = '${POSTGRES_USER}'
+                    env.POSTGRES_PASSWORD = '${POSTGRES_PASSWORD}'
+                    env.POSTGRES_DB = '${POSTGRES_DB}'
+                    env.JWT_SECRET_KEY = '${JWT_SECRET_KEY}'
+                    env.DB_SERVICE_NAME = "awk '/name:/ {print $2}' phonebookapp-db.service.yaml"
+                }
+                sh "sed -i 's/[pg_user]/${POSTGRES_USER}/g' ./phonebookapp-secrets.yaml"
+                sh "sed -i 's/[pg_password]/${POSTGRES_PASSWORD}/g' ./phonebookapp-secrets.yaml"
+                sh "sed -i 's/[pg_db]/${POSTGRES_DB}/g' ./phonebookapp-secrets.yaml"
+                sh "sed -i 's/[db_service_name]/${DB_SERVICE_NAME}/g' ./phonebookapp-secrets.yaml"
+                sh "sed -i 's/[jwt_secret_name]/${JWT_SECRET_KEY}/g' ./phonebookapp-secrets.yaml"
+            }
+        }
+    }
+
+
+
+
+}

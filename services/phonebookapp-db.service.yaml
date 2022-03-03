@@ -1,1 +1,15 @@
-
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: phonebookapp-final-proj
+  name: phonebookapp-db-service
+  labels:
+    app: phonebookapp
+specs:
+  selector:
+    app: phonebook
+    tier: db
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

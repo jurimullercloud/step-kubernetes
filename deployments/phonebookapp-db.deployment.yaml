@@ -21,7 +21,7 @@ specs:
     specs:
       containers:
         - name: phonebookapp-db
-          image: {registry_name}/{image}:{version}
+          image: img_name_placeholder
           ports:
             - containerPort: 5432
           env:
@@ -40,5 +40,7 @@ specs:
                 secretKeyRef:
                   name: phonebookapp-secrets
                   key: POSTGRES_DB
-
-
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "python3 init_db.py"]
