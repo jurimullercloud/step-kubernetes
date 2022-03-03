@@ -20,9 +20,9 @@ pipeline {
         }
         stage ("Rollout Deployments") {
             steps {
+                sh 'kubectl apply -f ./deployments/phonebookapp-db.deployment.yaml'
                 sh 'kubectl apply -f ./deployments/phonebookapp-backend.deployment.yaml'
                 sh 'kubectl apply -f ./deployments/phonebookapp-frontend.deployment.yaml'
-                sh 'kubectl apply -f ./deployments/phonebookapp-db.deployment.yaml'
             }
         }
 

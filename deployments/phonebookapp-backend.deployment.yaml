@@ -28,26 +28,26 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  - name: phonebookapp-secrets
+                    name: phonebookapp-secrets
                     key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  - name: phonebookapp-secrets
-                    key: POSTGRES_PASSWORD
+                  name: phonebookapp-secrets
+                  key: POSTGRES_PASSWORD
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  - name: phonebookapp-secrets
-                    key: POSTGRES_DB
+                  name: phonebookapp-secrets
+                  key: POSTGRES_DB
             - name: PG_HOST
               valueFrom:
                 secretKeyRef:
-                  - name: phonebookapp-secrets
-                    key: PG_HOST
+                  name: phonebookapp-secrets
+                  key: PG_HOST
             - name: JWT_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  - name: phonebookapp-secrets
-                    key: JWT_SECRET_KEY
+                  name: phonebookapp-secrets
+                  key: JWT_SECRET_KEY
 
