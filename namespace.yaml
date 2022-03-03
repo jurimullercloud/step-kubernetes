@@ -1,4 +1,4 @@
 apiVersion: v1
 kind: Namespace
-metada:
+metadata:
   name: phonebookapp-final-proj
