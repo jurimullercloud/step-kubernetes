@@ -40,11 +40,11 @@ spec:
                 secretKeyRef:
                   name: phonebookapp-secrets
                   key: POSTGRES_DB
-            - name: PG_HOST
+            - name: DB_SERVICE_NAME
               valueFrom:
                 secretKeyRef:
                   name: phonebookapp-secrets
-                  key: PG_HOST
+                  key: DB_SERVICE_NAME
             - name: JWT_SECRET_KEY
               valueFrom:
                 secretKeyRef:
