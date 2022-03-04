@@ -41,7 +41,7 @@ spec:
                   name: phonebookapp-secrets
                   key: POSTGRES_DB
             - name: RUNNING_NEV
-              value: "DB"
+              value: DB
             - name: DB_SERVICE_IP
               value: [db-service-ip]
           lifecycle:

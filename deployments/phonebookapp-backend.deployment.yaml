@@ -41,7 +41,7 @@ spec:
                   name: phonebookapp-secrets
                   key: POSTGRES_DB
             - name: RUNNING_ENV
-              value: "BACKEND"
+              value: BACKEND
             - name: DB_HOST_IP
               value: [db_host_ip]
             - name: JWT_SECRET_KEY
