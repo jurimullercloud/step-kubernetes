@@ -19,7 +19,7 @@ pipeline {
                 }
                 sh 'echo $DB_HOST_IP'
                 sh 'pip3 install -r requirements.txt'
-                sh 'python3 replace-container-names.py BACKEND_IMAGE_NAME=${BACKEND_IMAGE_NAME} FRONTEND_IMAGE_NAME=${FRONTEND_IMAGE_NAME} DB_IMAGE_NAME=${DB_IMAGE_NAME} DB_HOST_IP=$DB_HOST_IP'
+                sh 'python3 replace-container-names.py BACKEND_IMAGE_NAME=${BACKEND_IMAGE_NAME} FRONTEND_IMAGE_NAME=${FRONTEND_IMAGE_NAME} DB_IMAGE_NAME=${DB_IMAGE_NAME} DB_SERVICE_IP=$DB_HOST_IP'
 
             }
         }
