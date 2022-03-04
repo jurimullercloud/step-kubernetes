@@ -40,7 +40,3 @@ spec:
                 secretKeyRef:
                   name: phonebookapp-secrets
                   key: POSTGRES_DB
-          lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sh", "-c", "python3 init_database.py"]
