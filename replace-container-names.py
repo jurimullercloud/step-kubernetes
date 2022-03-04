@@ -15,7 +15,7 @@ if __name__ == "__main__":
         db_deployment = yaml.safe_load(f)
 
     backend_deployment["spec"]["template"]["spec"]["containers"][0]["image"] = data["BACKEND_IMAGE_NAME"]
-    backend_deployment["spec"]["template"]["spec"]["containers"][0]["env"][3]["value"] = data["DB_HOST_IP"]
+    backend_deployment["spec"]["template"]["spec"]["containers"][0]["env"][3]["value"] = data["DB_SERVICE_IP"]
 
     frontend_deployment["spec"]["template"]["spec"]["containers"][0]["image"] = data["FRONTEND_IMAGE_NAME"]
 
