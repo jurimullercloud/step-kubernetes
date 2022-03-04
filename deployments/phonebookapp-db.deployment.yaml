@@ -40,8 +40,6 @@ spec:
                 secretKeyRef:
                   name: phonebookapp-secrets
                   key: POSTGRES_DB
-            - name: DB_SERVICE_IP
-              value: [db-service-ip]
             - name: RUNNING_ENV
               value: "DB"
           lifecycle:

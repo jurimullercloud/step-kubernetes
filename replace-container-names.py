@@ -19,7 +19,6 @@ if __name__ == "__main__":
 
     frontend_deployment["spec"]["template"]["spec"]["containers"][0]["image"] = data["FRONTEND_IMAGE_NAME"]
     db_deployment["spec"]["template"]["spec"]["containers"][0]["image"] = data["DB_IMAGE_NAME"]
-    db_deployment["spec"]["template"]["spec"]["containers"][0]["env"][3]["value"] = data["DB_HOST_IP"]
 
 
     with open("./deployments/phonebookapp-backend.deployment.yaml", "w") as f:
